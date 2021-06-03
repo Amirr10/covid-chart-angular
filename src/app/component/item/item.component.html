@@ -1,0 +1,13 @@
+<div class="item-container" 
+    (click)="date === undefined ? sendMsg() : toggleCheckbox(objData.postal)"
+    [ngStyle]="{'backgroundColor': checkbox ? '#03A9F4' : 'white' }">
+    
+    <tr>
+        <td><input class="item-checkbox" type="checkbox" value={{objData.postal}} [checked]="checkbox"
+                [disabled]="date === undefined">
+        </td>
+        <td>{{objData.state}}</td>
+        <td>{{objData.postal}}</td>
+    </tr>
+</div>
+

@@ -1,0 +1,29 @@
+
+<div class="grid-headers">
+
+    <div class="grid-top-options">
+       
+        <mat-form-field class="grid-datepicker" appearance="outline">
+            <mat-label>Select a Date</mat-label>
+            <input matInput readonly="true" (dateChange)="getDateInput($event)" [min]="minDate" [max]="maxDate" [matDatepicker]="picker">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+    </div>
+
+    <div class="grid-selected-states" *ngIf="dataArray.length !== 0">{{dataArray.length}} States selected</div>
+
+</div>
+
+<div class="grid-items">
+    <table class="grid-table">
+        <tr>
+            <th>State</th>
+            <th>Postal</th>
+            <th>Country</th>
+        </tr>
+
+        <app-item (checkboxValue)="fetchDataFromDate($event)" *ngFor="let obj of menuGridArr" (msgError)="displayDateMsg($event)"  [date]="selectedDate"  [objData]="obj"></app-item>
+
+    </table>
+</div>

@@ -1,0 +1,13 @@
+<div class="chart-container">
+    
+    <div class="grid-wrapper">
+        <app-grid [chartData]="fetchedData" (stateData)="drawChart($event)"  [keys]="objKeys"></app-grid>
+    </div>
+
+    <div class="chart-wrapper">
+        <p>COVID-19 Positive cases per day</p>
+        <chart class="chart-graph" [type]="type" [data]="data" [options]="options"></chart>
+    </div>
+
+</div>
+

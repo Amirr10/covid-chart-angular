@@ -1,0 +1,42 @@
+.chart-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.chart-wrapper {
+    width: 60%;
+    height: 80%;
+    text-align: center;
+    border: 1px solid black;
+}
+
+.chart-wrapper p {
+    padding-top: 3%;
+}
+
+.grid-wrapper {
+    width: 18%;
+    height: 80%;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    /* scrollbar-color: black; */
+    border: 1px solid black;
+}
+
+.grid-wrapper::-webkit-scrollbar { 
+    width: 10px !important ;
+}
+
+.grid-wrapper::-webkit-scrollbar-thumb {
+    background: rgba(65, 60, 60, 0.5) !important; 
+    border-radius: 5px !important;
+  }
+
+.chart-graph {
+    height: 80%;
+    width: 85%;
+    margin: auto;
+}
+

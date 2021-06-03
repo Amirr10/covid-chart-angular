@@ -1,0 +1,81 @@
+.grid-headers {
+    display:flex;
+    /* justify-content: space-around; */
+    flex-wrap: nowrap;
+    flex-direction: column;
+    width: 100%;
+    height: 20%;
+    border: 1px solid green;
+}
+
+
+.grid-top-options {
+    position: sticky;
+    display: flex;
+    flex-direction: row;
+    height: 50%;
+    width: 100%;
+}
+
+.grid-datepicker {
+    width: 80%;
+    height: 100% ;
+    overflow-y: hidden;
+}
+
+.grid-selected-states {
+    display: flex;
+    align-items: flex-end;
+    height: 100%;
+}
+
+.grid-datepicker-input {
+    height: 100%;
+}
+
+.mat-form-field {
+    height: 100% !important;
+  }
+
+.grid-dropdown {
+    width: 40%;
+    height: 40%;
+    overflow-y: hidden;
+}
+
+.grid-items  {
+    height: 100%;
+}
+
+
+.grid-table {
+    width: 100%;
+    border-collapse: collapse;
+
+}
+
+.grid-table tr{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    /* justify-content: space-between; */
+    /* border: 1px solid black; */
+}
+
+th {
+    text-align: center;
+    width: 40%;
+    box-sizing:border-box;
+    clear:both;
+    border: 1px solid black;
+}
+
+
+.grid-items ul {
+    list-style-type: none;
+    z-index: 10;
+
+}
+
+.grid-items ul li {
+}
