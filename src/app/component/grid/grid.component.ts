@@ -34,6 +34,18 @@ export class GridComponent implements OnInit {
     this.maxDate = new Date(currentYear, 2, 7);
   }
 
+  ngOnInit(): void {
+    this.stateKeysArr = Object.keys(this.json)
+
+    for (const key of this.stateKeysArr) {
+
+      let stateName = this.json[key]
+      let postalName = key
+
+      this.menuGridArr.push({state: stateName, postal: postalName})
+    }
+  }
+
   //parse the date when a user select a date from the datepicker
   getDateInput(e){
     let dateObj = e.value.toString()
@@ -62,8 +74,7 @@ export class GridComponent implements OnInit {
   }
 
   //get data from api by postalCode and date code
-  //fetchDataFromDate(postalCode, date){
-    fetchDataFromDate(eventObject){
+    fetchDataFromDate(eventObject){ // {postalCode, date}
 
     let date = this.selectedDate
     let checkbox = eventObject.checkbox
@@ -105,21 +116,9 @@ export class GridComponent implements OnInit {
     }
   }
 
+
   displayDateMsg(msg){
     alert(msg)
-  }
-
-  ngOnInit(): void {
-
-    this.stateKeysArr = Object.keys(this.json)
-
-    for (const key of this.stateKeysArr) {
-
-      let stateName = this.json[key]
-      let postalName = key
-
-      this.menuGridArr.push({state: stateName, postal: postalName})
-    }
   }
 
 

@@ -12,6 +12,18 @@ export class ChartComponent {
 
   constructor(private http: ApiService){ }
 
+  ngOnInit(){
+    this.type = 'line';
+    this.data = {
+        labels: [2020, 2021],
+        datasets:  [] //array of objects 
+      }
+      this.options = {
+        responsive: true,
+        maintainAspectRatio: false
+      };
+  }
+  
   //data for filling the chart component
   type: string
   data: object
@@ -37,19 +49,6 @@ export class ChartComponent {
         }
       }
     }
-  }
-
-  ngOnInit(){
-
-    this.type = 'line';
-    this.data = {
-        labels: [2020, 2021],
-        datasets:  [] //array of objects 
-      }
-      this.options = {
-        responsive: true,
-        maintainAspectRatio: false
-      };
   }
 
     //labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug','Sep' ,'Oct' ,'Nov' ,'Dec'],
