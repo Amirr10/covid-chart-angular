@@ -9,10 +9,6 @@
     /* width: 55%; */
 }
 
-.item-checkbox {
-
-}
-
 td {
     text-align: center;
     width: 40%;
@@ -20,5 +16,4 @@ td {
     clear:both;
     white-space: nowrap;
     overflow-x: hidden;
-    /* border: 1px solid black; */
 }

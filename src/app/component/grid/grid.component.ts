@@ -3,7 +3,6 @@ import { Component, EventEmitter, OnInit, Input, Output } from '@angular/core';
 import { ApiService } from '../../service/api.service';
 import * as jsonData from '../../states_hash.json'
 
-
 @Component({
   selector: 'app-grid',
   templateUrl: './grid.component.html',
@@ -11,29 +10,24 @@ import * as jsonData from '../../states_hash.json'
 })
 export class GridComponent implements OnInit {
 
-  @Input() chartData
   @Input() keys
-
   @Output() stateData = new EventEmitter()
 
   json:any = (jsonData as any).default
 
-  menuGridArr = [] //store the menu data
+  menuGridArr: object[] = [] //store the menu data
   stateKeysArr: string[] //array to init the menu grid
 
   stateName: string 
   postalName: string
 
-  selectedDate: any //store the user current selected date
-
+  selectedDate: number //store the user current selected date
   dataArray:any = [] //array of the fetched data that will be sent to the chart
 
   minDate: Date; //min date for the calander config
   maxDate: Date; //max date for the calander config
 
-
   constructor(private http: ApiService) {
-
     const currentYear = new Date().getFullYear();
 
     this.minDate = new Date(2020, 3, 4);
@@ -42,8 +36,6 @@ export class GridComponent implements OnInit {
 
   //parse the date when a user select a date from the datepicker
   getDateInput(e){
-
-    console.log(this.selectedDate)
     let dateObj = e.value.toString()
 
     if(this.selectedDate === undefined){
@@ -51,7 +43,6 @@ export class GridComponent implements OnInit {
     } 
     //update the current checked states with the new Date
     else {
-
       this.selectedDate =  this.parseFullDate(dateObj)
 
       //get the array data of all the checked states
@@ -65,13 +56,10 @@ export class GridComponent implements OnInit {
 
           let eventObject = { date: this.selectedDate, postalCode: obj.label, checkbox: true}
           this.fetchDataFromDate(eventObject)
-        
       })
     }
-    // console.log(month, day, year, parsedMonth)
+
   }
-
-
 
   //get data from api by postalCode and date code
   //fetchDataFromDate(postalCode, date){
@@ -84,9 +72,7 @@ export class GridComponent implements OnInit {
 
     //add data to chart
     if(checkbox){
-
       //fetch Data from the state we want by postal code
-      //https://api.covidtracking.com/v1/states/az/daily.json
         this.http.getData(`https://api.covidtracking.com/v1/states/${postalCode}/daily.json`)
         .subscribe(res => {
           let data = res
@@ -94,7 +80,6 @@ export class GridComponent implements OnInit {
 
           let filtered = data.slice(0, index)
           let temp = filtered[0]
-          let rand = Math.random() * 20
           let positiveArr = filtered.map(obj => obj.positive)
 
           let stateObj = {
@@ -108,27 +93,21 @@ export class GridComponent implements OnInit {
           }
 
           this.dataArray.push(stateObj)
-          let tempDataArrFull = this.dataArray
-
           this.stateData.emit(this.dataArray)
         })
         
     //remove data from chart
     } else {
-
       let temp = [...this.dataArray]
       this.dataArray = temp.filter(obj => obj.label !== postalCode.toUpperCase())
 
       this.stateData.emit(this.dataArray)
     }
-
   }
 
   displayDateMsg(msg){
-    console.log(msg)
     alert(msg)
   }
-
 
   ngOnInit(): void {
 
@@ -163,7 +142,6 @@ export class GridComponent implements OnInit {
 
 
   parseMonth(month){
-
     let numMonth: string
 
     switch(month){

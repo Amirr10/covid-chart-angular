@@ -1,7 +1,7 @@
 <div class="chart-container">
     
     <div class="grid-wrapper">
-        <app-grid [chartData]="fetchedData" (stateData)="drawChart($event)"  [keys]="objKeys"></app-grid>
+        <app-grid (stateData)="drawChart($event)"></app-grid>
     </div>
 
     <div class="chart-wrapper">
