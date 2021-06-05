@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { ItemClickedEvent } from 'src/app/models/item-clicked-event';
 
 @Component({
   selector: 'app-item',
@@ -8,18 +9,18 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 export class ItemComponent implements OnInit {
 
-  @Input() objData:any
-  @Input() date: number
-  @Output() checkboxValue = new EventEmitter()
-  @Output() msgError = new EventEmitter()
-  
-  checkbox: boolean
-  keys:any 
+  @Input() objData: any;
+  @Input() date: number;
+  @Output() itemClicked = new EventEmitter<ItemClickedEvent>();
+  @Output() msgError = new EventEmitter<string>();
+
+  checkbox: boolean;
+  keys: any;
 
   constructor() { }
 
   ngOnInit(): void {
-    this.keys = this.objData 
+    this.keys = this.objData
   }
 
   getCheckboxVal(checkbox, postal) {
@@ -29,17 +30,17 @@ export class ItemComponent implements OnInit {
     this.checkbox = checkbox
 
     if (this.date !== undefined) {
-      this.checkboxValue.emit({ postalCode, checkbox: this.checkbox })
+      this.itemClicked.emit({ postalCode, isSelected: this.checkbox })
     }
   }
 
-  toggleCheckbox(postal){
+  toggleCheckbox(postal): void {
     this.checkbox = !this.checkbox
     this.getCheckboxVal(this.checkbox, postal)
   }
 
-  sendMsg(){
-    if(this.date === undefined){
+  sendMsg(): void {
+    if (this.date === undefined) {
       this.msgError.emit('Please Select a Date')
     }
   }

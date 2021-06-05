@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Chart } from 'chart.js';
 import { ApiService } from '../../service/api.service';
 
@@ -9,47 +9,44 @@ import { ApiService } from '../../service/api.service';
 })
 
 export class ChartComponent {
-
-  constructor(private http: ApiService){ }
-
-  ngOnInit(){
-    this.type = 'line';
-    this.data = {
-        labels: [2020, 2021],
-        datasets:  [] //array of objects 
-      }
-      this.options = {
-        responsive: true,
-        maintainAspectRatio: false
-      };
-  }
   
+  constructor(private http: ApiService) { }
+
+  @Input() datasets:any;
   //data for filling the chart component
   type: string
   data: object
   options: object
 
   chartData: object[] = [] //array that stores all datasets objects for the chart component
+  dateFormatDisplay: string[]
 
-  drawChart(datasetArr) {
-
-    this.chartData = datasetArr
+  ngOnInit() {
 
     this.type = 'line';
     this.data = {
-      labels: ['2020', '2021'],
-      datasets: this.chartData //array of objects 
+      labels: [],
+      datasets: []
     }
     this.options = {
-      animation: false,
-      scales: {
-        x: {
-          type: 'timeseries',
-
-        }
-      }
-    }
+      responsive: true,
+      maintainAspectRatio: false
+    };
   }
 
-    //labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug','Sep' ,'Oct' ,'Nov' ,'Dec'],
+  
+  drawChart(datasetArr) {
+
+    this.chartData = datasetArr.dataArray
+    this.dateFormatDisplay = datasetArr.dateDisplay
+
+    this.type = 'line';
+    this.data = {
+      labels: this.dateFormatDisplay.map(date => date),
+      datasets: this.chartData
+    }
+    this.options = {
+      animation: false
+    }
+  }
 }
