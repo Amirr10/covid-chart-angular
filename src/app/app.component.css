@@ -1,5 +1,35 @@
 .container {
     width: 100%;
-    height: 100vh;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
+.app-chart-container {
+    width: 60%;
+    height: 80%;
+    display: flex;
+    align-items: center;
+}
+
+.grid-wrapper {
+    width: 18%;
+    height: 80%;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    border-radius: 5px;
+    border: 1px solid black;
+}
+
+.grid-wrapper::-webkit-scrollbar {
+     width: 10px;
+     height: 2px !important; 
+     background: #dddddd;
+     border-radius: 3px;
+}
+   
+.grid-wrapper::-webkit-scrollbar-thumb { 
+    background-color: #aea4a4;
+    border-radius: 2ex; 
+}

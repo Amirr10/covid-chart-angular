@@ -7,5 +7,23 @@ import { Component } from '@angular/core';
 })
 
 export class AppComponent {
-  title = 'chart-angular';
+
+  datasetsAndDates: object
+
+  type: string
+  data: object
+  options: object
+
+  drawChart(data){
+    this.type = 'line'
+    this.data = {
+      labels: data.dateDisplay.map(date => date),
+      datasets: data.dataArray
+    }
+    this.options = {
+      animation: false
+    }
+
+    this.datasetsAndDates = data
+  }
 }

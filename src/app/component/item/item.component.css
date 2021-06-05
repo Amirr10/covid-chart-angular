@@ -1,12 +1,15 @@
 .item-container {
-    background-color: rgb(255, 247, 247);
+    /* background-color: rgb(255, 247, 247); */
     border: 1px solid rgb(51, 51, 51);
+}
+
+.item-container:hover {
+    cursor: pointer;
 }
 
 .item-container tr {
     display: flex;
     justify-content: space-around;
-    /* width: 55%; */
 }
 
 td {
@@ -16,4 +19,6 @@ td {
     clear:both;
     white-space: nowrap;
     overflow-x: hidden;
+    padding: 2%;
 }
+

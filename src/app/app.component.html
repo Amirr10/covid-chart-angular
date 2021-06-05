@@ -1,3 +1,7 @@
 <div class="container">
-  <app-chart></app-chart>
+  <div class="grid-wrapper">
+    <app-grid (onItemClicked)="drawChart($event)"></app-grid>
+  </div>
+
+  <app-chart class="app-chart-container" [datasetsAndDates]="datasetsAndDates"></app-chart>
 </div>

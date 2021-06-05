@@ -8,19 +8,19 @@
       <mat-datepicker #picker></mat-datepicker>
     </mat-form-field>
   </div>
-
-  <div class="grid-selected-states" *ngIf="dataArray.length !== 0">{{dataArray.length}} States selected</div>
+  <div class="grid-selected-states" *ngIf="dataArray.length !== 0">{{dataArray.length}} Selected States</div>
 </div>
 
 <div class="grid-items">
   <table class="grid-table">
     <tr>
+      <th>#</th>
       <th>State</th>
       <th>Postal</th>
-      <th>Country</th>
     </tr>
 
-    <app-item (itemClicked)="fetchDataFromDate($event)" *ngFor="let obj of menuGridArr"
-      (msgError)="displayDateMsg($event)" [date]="selectedDate" [objData]="obj"></app-item>
+    <app-item matTooltip={{tooltip}} (mouseover)="onHover(obj)" (itemClicked)="itemClicked($event)" *ngFor="let obj of menuGridArr"
+              (msgError)="displayDateMsg($event)" [date]="selectedDate" [objData]="obj">
+    </app-item>
   </table>
 </div>

@@ -14,7 +14,8 @@ import * as jsonData from '../../states_hash.json'
 export class GridComponent implements OnInit, OnDestroy {
 
   @Input() keys
-  @Output() stateData = new EventEmitter()
+  @Output() onItemClicked = new EventEmitter()
+  @Output() onDateSelected = new EventEmitter()
 
   json: any = (jsonData as any).default
 
@@ -26,15 +27,18 @@ export class GridComponent implements OnInit, OnDestroy {
   postalName: string
 
   dateDisplayFormat: string
-  selectedDate: number 
+  selectedDate: number
   dataArray: any = [] //array of the fetched data that will be sent to the chart
+  
   datasetsAndDates: object
   allSelectedDaysArr: string[]
 
   minDate: Date; //min date for the calander config
   maxDate: Date; //max date for the calander config
 
-  constructor(private http: ApiService) {
+  tooltip: string
+
+  constructor(private apiService: ApiService) {
     const currentYear = new Date().getFullYear();
 
     this.minDate = new Date(2020, 3, 4);
@@ -57,6 +61,10 @@ export class GridComponent implements OnInit, OnDestroy {
     this.subscription.unsubscribe();
   }
 
+  onHover(event){
+    this.tooltip = event.state
+  }
+
   //parse the date when a user selects a date from the datepicker
   getDateInput(event) {
     let dateObj = event.value.toString();
@@ -73,15 +81,15 @@ export class GridComponent implements OnInit, OnDestroy {
 
       //loop through the states and make a req with the new the date
       tempArr.map(obj => {
-
         let eventObject = { date: this.selectedDate, postalCode: obj.label, isSelected: true }
-        this.fetchDataFromDate(eventObject)
+        this.itemClicked(eventObject)
       })
     }
   }
 
+
   //get data from api by postalCode and date code
-  fetchDataFromDate(event: ItemClickedEvent) { // {postalCode, date}
+  itemClicked(event: ItemClickedEvent) { // {postalCode, date}
 
     let date = this.selectedDate
     let isSelected = event.isSelected
@@ -91,7 +99,7 @@ export class GridComponent implements OnInit, OnDestroy {
     //add data to chart
     if (isSelected) {
       //fetch Data from the state we want by postal code
-      this.subscription = this.http.getCovidData(postalCode)
+      this.subscription = this.apiService.getCovidData(postalCode)
         .subscribe(res => {
           let data = res
           let index = data.findIndex(obj => obj.date === date)
@@ -113,23 +121,24 @@ export class GridComponent implements OnInit, OnDestroy {
           this.dataArray.push(stateObj)
           this.datasetsAndDates = { dataArray: this.dataArray, dateDisplay: this.allSelectedDaysArr }
 
-          this.stateData.emit(this.datasetsAndDates)
-        })
+          this.onItemClicked.emit(this.datasetsAndDates)
+        });
 
       //remove data from chart
     } else {
       let temp = [...this.dataArray]
-
       this.dataArray = temp.filter(obj => obj.label !== postalCode.toUpperCase())
-      this.datasetsAndDates = { dataArray: this.dataArray, dateDisplay: this.allSelectedDaysArr }
 
-      this.stateData.emit(this.datasetsAndDates)
+      this.datasetsAndDates = { dataArray: this.dataArray, dateDisplay: this.allSelectedDaysArr }
+      this.onItemClicked.emit(this.datasetsAndDates)
     }
   }
+
 
   displayDateMsg(msg) {
     alert(msg)
   }
+
 
   parseFullDate(dateObj) {
     let strArr = dateObj.split(" ")
@@ -146,6 +155,7 @@ export class GridComponent implements OnInit, OnDestroy {
     return this.selectedDate
   }
 
+
   parseToDateFormat(date) {
     let dateToArr = date.toString().split('')
     let year = dateToArr.slice(0, 4).reduce((acc, curr) => acc + curr)
@@ -153,9 +163,9 @@ export class GridComponent implements OnInit, OnDestroy {
     let day = dateToArr.slice(6, 8).reduce((acc, curr) => acc + curr)
 
     let dateFormatDisply = `${year}-${month}-${day}`
-
     return dateFormatDisply
   }
+
 
   parseMonth(month) {
     let numMonth: string

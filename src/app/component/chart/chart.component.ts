@@ -1,6 +1,4 @@
 import { Component, Input } from '@angular/core';
-import { Chart } from 'chart.js';
-import { ApiService } from '../../service/api.service';
 
 @Component({
   selector: 'app-chart',
@@ -10,9 +8,9 @@ import { ApiService } from '../../service/api.service';
 
 export class ChartComponent {
   
-  constructor(private http: ApiService) { }
+  constructor() { }
 
-  @Input() datasets:any;
+  @Input() datasetsAndDates:any;
   //data for filling the chart component
   type: string
   data: object
@@ -22,7 +20,6 @@ export class ChartComponent {
   dateFormatDisplay: string[]
 
   ngOnInit() {
-
     this.type = 'line';
     this.data = {
       labels: [],
@@ -34,19 +31,18 @@ export class ChartComponent {
     };
   }
 
-  
-  drawChart(datasetArr) {
-
-    this.chartData = datasetArr.dataArray
-    this.dateFormatDisplay = datasetArr.dateDisplay
+  ngOnChanges(){
+    this.chartData = this.datasetsAndDates?.dataArray
+    this.dateFormatDisplay = this.datasetsAndDates?.dateDisplay
 
     this.type = 'line';
     this.data = {
-      labels: this.dateFormatDisplay.map(date => date),
+      labels: this.dateFormatDisplay?.map(date => date),
       datasets: this.chartData
     }
     this.options = {
       animation: false
     }
   }
+
 }

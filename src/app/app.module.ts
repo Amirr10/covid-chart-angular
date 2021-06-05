@@ -17,6 +17,7 @@ import {MatGridListModule} from '@angular/material/grid-list';
 
 import {MatTableModule} from '@angular/material/table';
 import {MatMenuModule} from '@angular/material/menu';
+import {MatTooltipModule} from '@angular/material/tooltip';
 
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -41,7 +42,8 @@ import { ItemComponent } from './component/item/item.component';
     MatGridListModule,
     BrowserAnimationsModule,
     MatMenuModule,
-    MatTableModule
+    MatTableModule,
+    MatTooltipModule
   ],
   providers: [ApiService],
   bootstrap: [AppComponent]

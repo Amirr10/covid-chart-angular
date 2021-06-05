@@ -15,17 +15,14 @@ export class ItemComponent implements OnInit {
   @Output() msgError = new EventEmitter<string>();
 
   checkbox: boolean;
-  keys: any;
 
   constructor() { }
 
   ngOnInit(): void {
-    this.keys = this.objData
   }
 
   getCheckboxVal(checkbox, postal) {
 
-    console.log(this.date)
     let postalCode = postal.toLowerCase()
     this.checkbox = checkbox
 
@@ -34,11 +31,13 @@ export class ItemComponent implements OnInit {
     }
   }
 
+
   toggleCheckbox(postal): void {
     this.checkbox = !this.checkbox
     this.getCheckboxVal(this.checkbox, postal)
   }
 
+  
   sendMsg(): void {
     if (this.date === undefined) {
       this.msgError.emit('Please Select a Date')
