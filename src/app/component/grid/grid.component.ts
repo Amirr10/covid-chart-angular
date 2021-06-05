@@ -13,7 +13,6 @@ import * as jsonData from '../../states_hash.json'
 })
 export class GridComponent implements OnInit, OnDestroy {
 
-  @Input() keys
   @Output() onItemClicked = new EventEmitter()
   @Output() onDateSelected = new EventEmitter()
 
