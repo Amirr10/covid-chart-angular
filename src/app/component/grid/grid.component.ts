@@ -104,7 +104,7 @@ export class GridComponent implements OnInit, OnDestroy {
           let data = res
           let index = data.findIndex(obj => obj.date === date)
 
-          let filtered = data.slice(0, index)
+          let filtered = data.slice(0, index + 1)
           let temp = filtered[0]
           let positiveArr = filtered.map(obj => obj.positive)
           this.allSelectedDaysArr = filtered.map(obj => this.parseToDateFormat(obj.date)).reverse()
