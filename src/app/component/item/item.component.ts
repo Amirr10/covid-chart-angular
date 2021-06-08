@@ -19,10 +19,11 @@ export class ItemComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+
   }
 
   getCheckboxVal(checkbox, postal) {
-
+    
     let postalCode = postal.toLowerCase()
     this.checkbox = checkbox
 
@@ -33,6 +34,7 @@ export class ItemComponent implements OnInit {
 
 
   toggleCheckbox(postal): void {
+
     this.checkbox = !this.checkbox
     this.getCheckboxVal(this.checkbox, postal)
   }

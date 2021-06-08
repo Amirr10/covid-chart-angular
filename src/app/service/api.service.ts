@@ -9,9 +9,10 @@ import { ChartDataResponseDto } from '../dtos/chart-data-response-dto';
 export class ApiService {
 
   constructor(private http: HttpClient) { }
-  private readonly covidDataApiPath = `https://api.covidtracking.com/v1/states/`;
-
-  getCovidData(postalCode: string) {
-    return this.http.get<any[]>(`${this.covidDataApiPath}/${postalCode}/daily.json`);
+    private readonly currencyDataApiPath = `http://api.exchangeratesapi.io/v1/timeseries?access_key=API_KEY&`; //API Key
+    private timeFrame = `start_date=2021-03-15&end_date=2021-04-09&base=EUR&symbols=USD,AUD,CAD,PLN,MXN`;
+    
+  getCurrencyData(currencyCode, startDate, endDate) {
+    return this.http.get<any[]>(`${this.currencyDataApiPath}start_date=${startDate}&end_date=${endDate}&base=EUR&symbols=${currencyCode}`)
   }
 }

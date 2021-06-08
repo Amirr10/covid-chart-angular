@@ -18,6 +18,9 @@ import {MatGridListModule} from '@angular/material/grid-list';
 import {MatTableModule} from '@angular/material/table';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatTooltipModule} from '@angular/material/tooltip';
+import { ReactiveFormsModule } from '@angular/forms';
+
+// import { MatDateRangePicker } from '@angular/material/datepicker/date-range-picker';
 
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -43,7 +46,8 @@ import { ItemComponent } from './component/item/item.component';
     BrowserAnimationsModule,
     MatMenuModule,
     MatTableModule,
-    MatTooltipModule
+    MatTooltipModule,
+    ReactiveFormsModule
   ],
   providers: [ApiService],
   bootstrap: [AppComponent]

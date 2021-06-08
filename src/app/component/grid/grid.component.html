@@ -1,11 +1,13 @@
 <div class="grid-headers">
   <div class="grid-top-options">
-    <mat-form-field class="grid-datepicker" appearance="outline">
-      <mat-label>Select a Date</mat-label>
-      <input matInput readonly="true" (dateChange)="getDateInput($event)" [min]="minDate" [max]="maxDate"
-        [matDatepicker]="picker">
+    <mat-form-field class="grid-datepicker" appearance="fill">
+      <mat-label>Enter a date range</mat-label>
+      <mat-date-range-input [formGroup]="range" [rangePicker]="picker">
+        <input matStartDate readonly="true" formControlName="start"> 
+        <input matEndDate readonly="true" (dateChange)="getEndDate($event)" formControlName="end" >
+      </mat-date-range-input>
       <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-      <mat-datepicker #picker></mat-datepicker>
+      <mat-date-range-picker #picker></mat-date-range-picker>
     </mat-form-field>
   </div>
   <div class="grid-selected-states" *ngIf="dataArray.length !== 0">{{dataArray.length}} Selected States</div>
